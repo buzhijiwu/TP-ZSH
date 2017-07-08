@@ -1,0 +1,32 @@
+[ 2016-01-22T22:35:27+08:00 ] ::1 /thinkphp_zsh/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000048s ]
+INFO: [ app_init ] --END-- [ RunTime:0.081407s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.045082s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.045304s ]
+
+[ 2016-01-22T22:36:12+08:00 ] ::1 /thinkphp_zsh/index.php?s=/Home/Other/redis_export
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000041s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001005s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001440s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001668s ]
+
+[ 2016-01-22T23:04:54+08:00 ] ::1 /thinkphp_zsh/index.php?s=/Home/Other/redis_user
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000043s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001884s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.033338s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.033604s ]
+
+[ 2016-01-22T23:05:37+08:00 ] ::1 /thinkphp_zsh/index.php?s=/Home/Other/redis_user
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000043s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001378s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001214s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001395s ]
+

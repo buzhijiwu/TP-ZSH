@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__adminPublic__/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__adminPublic__/css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__adminPublic__/js/jquery.js"></script>
+<script type="text/javascript" src="__adminPublic__/js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="__adminPublic__/js/select-ui.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $(".select1").uedSelect({
+		width : 345			  
+	});
+	$(".select2").uedSelect({
+		width : 167  
+	});
+	$(".select3").uedSelect({
+		width : 100
+	});
+});
+</script>
+<title>Admin</title>
+</head>
+<body>
+<include file="common:top" />
+<include file="common:left" />
+<div class="fc_right" style=" padding-left:187px;">
+	<div style=" width:100%;">
+		<div class="place"> <span>位置：</span>
+  <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">系统设置</a></li>
+  </ul>
+</div>
+<div class="formbody">
+  <div id="usual1" class="usual">
+    <div class="itab">
+      <ul>
+        <li><a class="selected">参赛人员管理</a></li>
+       <!--   <li><a href="{:U('../admin/people/addPeople')}">添加人员</a></li> -->
+      </ul>
+    </div>
+    <div class="tabson">
+	<form method="post" action="{:U('../admin/people/index')}">
+	<ul class="seachform">
+        <li>
+          <label>活动id</label>
+          <input name="id" type="text" class="scinput" value="{$id}" />
+        </li>
+        <li>
+          <label>用户昵称</label>
+          <input name="nickname" type="text" class="scinput" value="{$nickname}" />
+        </li>
+        <li>
+          <label>openid</label>
+          <input name="openid" type="text" class="scinput" value="{$openid}" />
+        </li>
+        <li>
+          <label>&nbsp;</label>
+          <input name="" type="submit" class="scbtn" value="查询"/>
+        </li>
+      </ul>
+	 </form>
+      <table class="imgtable">
+        <thead>
+          <tr>
+          	<th>活动id</th>
+          	<th>活动主题</th>
+          	<th>头像</th>
+          	<th>昵称</th>
+			<th>openid</th>
+			<!--<th>中石化openid</th>-->
+			<th>得分</th>
+			<th>答题用时</th>
+			<th>是否分享</th>
+			<th>创建时间</th>
+			<th>排名</th>
+			<th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        <volist name="peoples" id="people">
+
+	          <tr>
+	          	<td>{$people.id}</td>
+	          	<td>{$people.title}</td>
+	            <td><img src="{$people.headimgurl}" style="width:50px;height:50px;"></td>
+	            <td>{$people.nickname}</td>
+	            <td>{$people.openid}</td>
+	            <!--<td>{$people.openid_zsh}</td>-->
+	            <td>{$people.score}</td>
+	            <td>{$people.use_time}</td>
+	            <td>
+	            	<if condition="$people.is_share eq 1">
+                        <span style="color:green;">是</span>
+                        <else/><span>否</span>
+	            	</if>
+	            </td>
+	            <td>{$people.create_time}</td>
+	             <td>
+                     <if condition="$people.ranking != '0'">
+                         <span style="color:red;"><b>{$people.ranking}</b></span>
+                         <else/>{$people.ranking}
+                     </if>
+	             </td>
+	             <td>
+	             	<span>
+                        <if condition="$people.reward_hongbao != '1'">
+                            <a href="{:U('../admin/people/setRank')}?id={$people.answer_id}" style="color:#09a;">设置排名</a>
+                        </if>
+                    </span>
+	             	<span>
+                        <if condition="($people.ranking != 0) and ($people.reward_hongbao == '0' or $people.reward_hongbao == '2')">
+                            <a href="{:U('../admin/people/sendRedPackage')}?cid={$people.id}&openid={$people.openid}" style="color:#09F">发送红包</a>
+                        </if>
+                    </span>
+	             </td>
+	           <!--   <td><a style="color:#09F" href="{:U('../admin/people/editpeople')}?user_id={$people.user_id}">编辑</a><a href="{:U('../admin/people/delete')}?user_id={$people.user_id}" style=" margin-left:5px;color:#09F">删除</a></td> -->
+	          </tr>
+
+		</volist>
+        </tbody>
+      </table>
+          {$link_page}  
+    </div>
+  </div>
+  <script type="text/javascript"> 
+		$('.tablelist tbody tr:odd').addClass('odd');
+		function showQrcode(obj,qrcode,user_id) {
+			if (qrcode != "") {
+				window.open(qrcode);
+			} else {
+				$.ajax({
+					type:"post",
+					data:'user_id='+user_id,
+					url:"/admin/people/createQrcode",
+					dataType:'json',
+					success:function(res){
+						window.open(res.qrcode);
+					},
+				});
+			}
+		}
+    </script> 
+</div>
+	</div>
+</div>
+</body>
+</html>

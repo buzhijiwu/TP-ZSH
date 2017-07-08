@@ -1,0 +1,371 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+    <title>一站到底知识竞猜</title>
+    <style>
+        body,
+        p {
+            margin: 0;
+        }
+        html {
+            /*background: #652700;*/
+            margin: 0;
+            min-height: 100%;
+            padding: 1em;
+            box-sizing: border-box;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            background: url('http://zshhb.weiwend.cn/zshyzdd/images/bg.png') center center no-repeat;
+	    -webkit-background-size:100% 100%;
+	    background-size:100% 100%;
+            font-family: '微软雅黑'
+        }
+        body {
+            padding: 1em;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            /*background: #600;*/
+            /*border: 2px solid #d29e39;*/
+            border-radius: 1em;
+        }
+        header {
+            padding: 7%;
+            background: #f2cc69;
+            border-radius: 1em;
+            line-height: 24px;
+        }
+        header img {
+            float: left;
+            width: 50px;
+            height: 50px;
+            margin-right: 1em;
+        }
+        .cls1 {
+            overflow: hidden;
+            font-weight: bold;
+        }
+        .red {
+            color: #f00;
+        }
+		.bai{
+			margin-right:20px;
+		}
+        .cls2 {
+            border: 1px solid;
+            border-radius: .5em;
+            margin-top: 1em;
+            padding: .6em 1em;
+            background: -webkit-linear-gradient(#f9e489, #e69f13);
+            background: linear-gradient(#f9e489, #e69f13);
+        }
+        .cls3 {
+            margin-top: .5em;
+            padding-top: .3em;
+            background: url('http://zshhb.weiwend.cn/zshyzdd/images/pic.png');
+            background-size: cover;
+            text-align: center;
+            overflow: hidden;
+	    -webkit-background-size:100% 100%;
+	    background-size:100% 100%;
+        }
+        .cls3 time {
+            color: #f7f274;
+        }
+        .cls3 p{
+            text-align: left;
+            color: #654e46;
+            margin: 1em 1.4em;
+            overflow: hidden;
+        }
+        .cls4 {
+            text-align: center;
+        }
+        .cls4 button {
+            margin-top: 1em;
+            line-height: 3em;
+            font-weight: bold;
+            font-size: 12px;
+            border: 0;
+            border-radius: .5em;
+        }
+        .cls4 .btn2 {
+            width: 45%;
+            background: -webkit-linear-gradient(#c5f4fe, #49b6f9);
+            background: linear-gradient(#c5f4fe, #49b6f9);
+            color: #652700;
+        }
+        .cls4 .btn1 {
+            width: 80%;
+            background: -webkit-linear-gradient(#ffffff, #bbbbbb);
+            background: linear-gradient(#ffffff, #bbbbbb);
+        }
+        .cls4 .huanga {
+            width: 80%;
+            background: -webkit-linear-gradient(#fafd96, #f4b534);
+            background: linear-gradient(#fafd96, #f4b534);
+        }
+        .cls4 .honga {
+            width: 80%;
+            background: -webkit-linear-gradient(#FF014F, #8b1f00);
+            background: linear-gradient(#FF014F, #8b1f00);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <img src="http://zshhb.weiwend.cn/zshyzdd/images/logo.png" alt="">
+        <div class="cls1">
+            <p>一站到底知识竞猜</p>
+            <p>站，是一种信仰</p>
+        </div>
+        <div class="cls2">
+            <p>得分：<span class="bai"></span> 还有<span class="red hong"></span>次机会</p>
+        </div>
+    </header>
+    <div class="cls3">
+        <time  class="shij"></time>
+        <p class="two"></p>
+    </div>
+    <div class="cls4">
+        <div>
+            <button id="a" onclick="cl('a')" class="btn1" type="button"></button>
+            <button id="b" onclick="cl('b')" class="btn1" type="button"></button>
+            <button id="c" onclick="cl('c')" class="btn1" type="button"></button>
+            <button id="d" onclick="cl('d')" class="btn1" type="button"></button>
+        </div>
+        <button onclick="location.reload()" class="btn2">重玩</button>
+    </div>
+</div>
+</div>
+</body>
+<script type="text/javascript" src="http://zshhb.weiwend.cn/zshyzdd/js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="http://zshhb.weiwend.cn/zshyzdd/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://zshhb.weiwend.cn/zshyzdd/js/jssdk_yzdd.js"></script>
+<script language="JavaScript">
+    var fen_dadui = 0;//得分
+    var fen_over = 9;//答对多少结束
+    var fen_one = 10;//每道题多少分
+    var fen_jihui = 3;//总共答题机会
+    var zuotishijian = 20;//做题时间
+    var num = 0;//题目总数量
+
+    var sy = 0;//闪耀句柄
+    var ccc = 0;//计时句柄
+    var jssy = 0;
+    var AfterTime;//计时变量
+
+    var tiku;//题库对象
+    var n = 0;//题库索引
+    var danqianti;//当前在做的题目对象
+    var jindu;//做题进度/做了，末做
+
+    //倒计时
+    function ShowTimes(){
+        LeaveTime = AfterTime - new Date();
+        LeaveSeconds=Math.floor(LeaveTime/1000%60);//秒
+        hm=LeaveTime-LeaveSeconds*1000;
+        q = Math.floor(hm/10);
+        if(q < 10){
+            q = "0" + q;
+        }
+        if(LeaveSeconds < 10){
+            LeaveSeconds = "0" + LeaveSeconds;
+        }
+        if(LeaveTime < 0){
+            window.clearInterval(ccc);
+            LeaveSeconds = "00";
+            q = "00";
+            date_over();
+        }
+        $(".shij").html(LeaveSeconds+":"+q);
+    }
+
+    //时间到了
+    function date_over(){
+        cl(0);
+    }
+
+    //取得题库
+    function loadtiku(fun){
+        n = 0;//初始化索引
+        var t;
+        $.ajax({
+            url:'/index.php?s=/Home/Yzdd/GetQuestions',
+            type : 'get',
+            timeout: 15000,
+            data :{},
+            dataType: 'json',
+            success:function(result){
+                num = result['number'];
+                tiku = result['data'];
+                fun();
+            },
+            error:function(){
+                alert('服务繁忙，请稍后重试');
+            }
+        });
+    }
+
+    //出题
+    function run(){
+        cls();
+        chuti(tiku[n]);
+        jindu = "末做";
+
+        AfterTime = new Date();
+        AfterTime.setSeconds(AfterTime.getSeconds()+zuotishijian);
+        n++;
+        ccc = setInterval("ShowTimes()",30);
+    }
+
+    //清空页面数据
+    function cls(){
+        $(".two").html("");
+        $(".cls4 > div > button").each(function(i){
+            $(this).attr("classx",null);
+            $(this).attr("class","btn1");
+            $(this).html("");
+        });
+    }
+
+    //更新题目
+    function chuti(ti){
+        danqianti = ti;
+        $("#a").html(ti.a);
+        $("#b").html(ti.b);
+        $("#c").html(ti.c);
+        $("#d").html(ti.d);
+        $(".two").html(ti.title);
+    }
+
+    //更新得分和剩余机会
+    function up(){
+        $(".bai").html(fen_dadui*fen_one);
+        if(fen_jihui > 1){
+            $(".hong").html(fen_jihui-1);
+        }else{
+            $(".hong").html(0);
+        }
+    }
+
+    //点击选择答案
+    function cl(select){
+        if(jindu == "做了"){return;}
+        jindu = "做了";
+        window.clearInterval(ccc);
+        if(select == danqianti.da){     //答对
+            dadui();
+            $("#"+select).attr("classx","huanga");  //正确答案显示黄色
+        }else{//答错
+            dacuo();
+            $("#"+select).attr("classx","honga");   //错了显示红色
+            $(".cls4 > div > button").each(function(i){
+                if($(this).attr('id') == danqianti.da){
+                    $(this).attr("classx","huanga");    //找到正确答案显示黄色
+                }
+            });
+        }
+        sy = setInterval("sanyao()",300);//闪耀
+        jssy = setTimeout("jieshu()", 2000);
+    }
+
+    //答对
+    function dadui(){
+        fen_dadui++;
+    }
+
+    //答错
+    function dacuo(){
+        fen_jihui--;
+    }
+
+    //答题结果
+    function jieshu(){
+        window.clearInterval(sy);//结速闪耀
+        up();//更新得分与剩余次数
+        if(fen_jihui > 0){
+            //完成答题
+            if(fen_dadui >= fen_over){
+                $.ajax({
+                    url:'/index.php?s=/Home/Yzdd/FinishAnswer',
+                    type : 'post',
+                    timeout: 15000,
+                    data :{
+                        number: num,
+                        score: fen_dadui
+                    },
+                    dataType: 'json',
+                    success:function(result){
+                        if(result.code == '0'){
+                            window.location.href = "slot_machine.html";
+                        }else if(result.code == '1'){   //已经领过红包s
+                            alert('亲，您已领取过红包，每人只能抽奖一次哦！');
+                        }else if(result.code == '2'){   //已经老虎机抽奖
+                            alert('亲，您已抽奖，红包正在路上...');
+                        }else if(result.code == '3'){   //活动尚未开始
+                            alert('亲，活动尚未开始，请耐心等待！');
+                        }else if(result.code == '4'){   //活动已经结束
+                            alert('亲，本期活动已经结束，下期再来吧！');
+                        }else if(result.code == '5'){   //红包已领完
+                            window.location.href = "http://zshhb.weiwend.cn/zshyzdd/html/slot_machine_end.html";
+                        }else if(result.code == '-1'){   //系统繁忙
+                            alert('亲，目前参与人数过多，请您稍后再来...');
+                        }else if(result.code == '-2'){   //尚未关注
+                            alert('请关注公众号，按照流程参与活动');
+                            window.location.href = wx_link;
+                        }else{
+                            alert('亲，目前服务繁忙，请稍后重试');
+                        }
+                    },
+                    error:function(){
+                        alert('服务繁忙，请稍后重试');
+                    }
+                });
+            }else{
+                if(n < num){
+                    run();
+                }else{
+                    alert("很遗憾，您未能完成答题");
+                }
+            }
+        }else{
+            alert("很遗憾，您未能完成答题");
+        }
+    }
+    //答题结果正确错误闪耀效果
+    function sanyao(){
+        $(".cls4 > div > button").each(function(i){
+            if($(this).attr("classx")!=null){
+                if($(this).attr("class")==$(this).attr("classx")){
+                    $(this).attr("class","btn1");
+                }else{
+                    $(this).attr("class",$(this).attr("classx"));
+                }
+            }
+        });
+    }
+
+    //重玩
+    function cw(){
+        for(i=0;i<=ccc;i++){
+            clearInterval(i)
+        }
+
+        window.clearInterval(sy);//结束闪耀
+        window.clearInterval(ccc);
+        window.clearInterval(jssy);
+
+        cls();
+        up();
+        loadtiku(function(){
+            run();
+            up();
+        });
+    }
+    cw();
+</script>
+</html>

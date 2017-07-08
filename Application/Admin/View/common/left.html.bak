@@ -1,0 +1,48 @@
+<div class="fc_left" style="background:#f0f9fd; width:187px; overflow:hidden; float:left;">
+	<div class="lefttop"><span></span>通讯录</div>
+    
+    <dl class="leftmenu">
+        
+	<dd>
+    <div class="title">
+    <span><img src="__PUBLIC__/images/leftico01.png" /></span>管理信息
+    </div>
+    	<ul class="menuson">
+			<li <?php if($nav_name=="Index"){echo "class='active'";}?>><cite></cite><a href="../index.html" target="rightFrame">基本设置</a><i></i></li>
+			<li <?php if($nav_name=="Author"){echo "class='active'";}?>><cite></cite><a href="{:U('../Admin/author/index')}" target="rightFrame">作者管理</a><i></i></li>
+			<li <?php if($nav_name=="Article"){echo "class='active'";}?>><cite></cite><a href="../article.html" target="rightFrame">文章管理</a><i></i></li>
+			<li <?php if($nav_name=="Product"){echo "class='active'";}?>><cite></cite><a href="../product.html" target="rightFrame">产品中心</a><i></i></li>
+			<li <?php if($nav_name=="Album"){echo "class='active'";}?>><cite></cite><a href="../album.html" target="rightFrame">图片管理</a><i></i></li>
+			<li <?php if($nav_name=="Page"){echo "class='active'";}?>><cite></cite><a href="../page.html" target="rightFrame">单页管理</a><i></i></li>
+			<li <?php if($nav_name=="Massage"){echo "class='active'";}?>><cite></cite><a href="../massage.html" target="rightFrame">留言管理</a><i></i></li>
+			<li <?php if($nav_name=="Job"){echo "class='active'";}?>><cite></cite><a href="../job.html" target="rightFrame">招聘信息</a><i></i></li>
+			<li <?php if($nav_name=="Ad"){echo "class='active'";}?>><cite></cite><a href="../ad.html" target="rightFrame">广告管理</a><i></i></li>
+			<li <?php if($nav_name=="Links"){echo "class='active'";}?>><cite></cite><a href="../links.html" target="rightFrame">友情链接</a><i></i></li>
+        </ul>    
+    </dd>
+    <dd>
+    <div class="title"><span><img src="__PUBLIC__/images/leftico02.png" /></span>微信管理</div>
+    <ul class="menuson">
+        <li><cite></cite><a href="#">微信设置</a><i></i></li>
+        <li><cite></cite><a href="#">选择模版</a><i></i></li>
+        <li><cite></cite><a href="#">编辑菜单</a><i></i></li>
+		<li><cite></cite><a href="#">文章管理</a><i></i></li>
+		<li><cite></cite><a href="#">底部信息</a><i></i></li>
+        </ul>     
+    </dd> 
+    <dd><div class="title"><span><img src="__PUBLIC__/images/leftico03.png" /></span>电商模块</div>
+    <ul class="menuson">
+        <li><cite></cite><a href="#">会员管理</a><i></i></li>
+        <li><cite></cite><a href="#">订单管理</a><i></i></li>
+    </ul>    
+    </dd>  
+    <dd><div class="title"><span><img src="__PUBLIC__/images/leftico04.png" /></span>站点管理</div>
+    <ul class="menuson">
+        <li><cite></cite><a href="#">会员管理</a><i></i></li>
+        <li><cite></cite><a href="#">站点列表</a><i></i></li>
+        <li><cite></cite><a href="#">申请管理</a><i></i></li>
+        <li><cite></cite><a href="#"></a><i></i></li>
+    </ul>
+    </dd>   
+    </dl>
+</div>

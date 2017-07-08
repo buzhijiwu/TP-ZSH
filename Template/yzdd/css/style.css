@@ -1,0 +1,148 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin: 0;
+	padding: 0;
+}
+html, body {
+	height: 100%;
+}
+body {
+	background-color: #f23039;
+}
+a{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
+.title {
+	width:100%;
+	margin: 0px auto 35px auto;
+}
+.line{
+	width:100%;
+}
+.machineContainer{
+	background: url("../images/bg-tiger.jpg") no-repeat;
+	background-size: 100% 100%;
+	width: 275px;
+	height: 248px;
+	overflow: hidden;
+	margin: 0 auto;
+	position: relative;
+}
+.slotMachine{
+	width: 43px;
+	height: 61px;
+	overflow: hidden;
+	display: inline-block;
+	text-align: center;
+	position: absolute;
+	top: 56px;
+}
+#machine1 {
+	left: 32px;
+}
+#machine2 {
+	left: 117px;
+}
+#machine3 {
+	left: 200px;
+}
+.machineResult{
+	color:#fff;
+	text-align:center;
+	font-weight: 900;
+}
+.noBorder{
+	border:none !important;
+	background: transparent !important;
+}
+.slotMachine .slot{
+	width: 100%;
+	height: 100%;
+}
+.slotMachine .slot span{
+    color:#ffff00;
+    font-size: 15px;
+    font-weight: bold;
+    position:absolute;
+    top: 21px;
+    left:0;
+    width:100%;
+    text-align:center;
+}
+.slotMachineContainer {
+	width: 100%;
+	height: 100%;
+}
+.slot0{
+    background: url("../images/ico-red-0.png") no-repeat;
+    background-size: 100% 100%;
+}
+.slot1{
+	background: url("../images/ico-red-1-38.png") no-repeat;
+	background-size: 100% 100%;
+}
+.slot2{
+	background: url("../images/ico-red-1-8.png") no-repeat;
+	background-size: 100% 100%;
+}
+.slot3{
+	background: url("../images/ico-red-1-88.png") no-repeat;
+	background-size: 100% 100%;
+}
+.slot4{
+	background: url("../images/ico-red-1-98.png") no-repeat;
+	background-size: 100% 100%;
+}
+.slot5{
+	background: url("../images/ico-red-3-8.png") no-repeat;
+	background-size: 100% 100%;
+}
+.slot6{
+	background: url("../images/ico-red-3-88.png") no-repeat;
+	background-size: 100% 100%;
+}
+.slot7{
+	background: url("../images/ico-red-5-8.png") no-repeat;
+	background-size: 100% 100%;
+}
+.slot8{
+	background: url("../images/ico-red-8-8.png") no-repeat;
+	background-size: 100% 100%;
+}
+.slot9{
+	background: url("../images/ico-red-18-8.png") no-repeat;
+	background-size: 100% 100%;
+}
+.slot10{
+	background: url("../images/ico-red-58-8.png") no-repeat;
+	background-size: 100% 100%;
+}
+.slot11{
+	background: url("../images/ico-red-188.png") no-repeat;
+	background-size: 100% 100%;
+}
+.slotMachineButton {
+	width: 250px;
+	height: 47px;
+	cursor:pointer;
+	position: absolute;
+	bottom: 20px;
+	left: 10px;
+}
+.get-money {
+	font-size: 14px;
+	color: white;
+	margin-top: 32px;
+	height: 20px;
+	display: none;
+}
+.get-money span {
+	font-size: 20px;
+	color: #ffd50d;
+}
+
+

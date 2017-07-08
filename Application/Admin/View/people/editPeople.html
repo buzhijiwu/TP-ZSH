@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=720,width=device-width, initial-scale=1,  initial-scale=1.0,maximum-scale=1.0, user-scalable=no;" />
+<link href="__adminPublic__/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__adminPublic__/css/select.css" rel="stylesheet" type="text/css" />
+<link href="__adminPublic__/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="__adminPublic__/css/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.css" type="text/css" />
+
+<script type="text/javascript" src="__adminPublic__/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__adminPublic__/js/jquery-ui-datepicker.js"></script>
+<script type="text/javascript" src="__adminPublic__/js/index.js"></script>
+<script type="text/javascript" src="__adminPublic__/js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="__adminPublic__/js/select-ui.min.js"></script>
+
+<script src="__adminPublic__/js/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+<script src="__adminPublic__/js/jquery-ui-timepicker-zh-CN.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3"></script>
+<script type="text/javascript" src="__adminPublic__/js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="__adminPublic__/js/select-ui.min.js"></script>
+<script type="text/javascript" src="__adminPublic__/js/index.js"></script>
+<script type="text/javascript" charset="utf-8" src="__adminPublic__/editor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__adminPublic__/editor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__adminPublic__/editor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $(".select1").uedSelect({
+		width : 345			  
+	});
+	$(".select2").uedSelect({
+		width : 167  
+	});
+	$(".select3").uedSelect({
+		width : 100
+	});
+});
+</script>
+<title>Admin</title>
+</head>
+<body>
+<include file="Common:top" />
+<include file="Common:left" />
+<div class="fc_right" style=" padding-left:187px;">
+	<div style=" width:100%;">
+		<div class="place"> <span>位置：</span>
+  <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">系统设置</a></li>
+  </ul>
+</div>
+<div class="formbody">
+<form action="{:U('/admin/people/edit')}" onsubmit="return checksubmit();" enctype="multipart/form-data" method="post">
+  <div id="usual1" class="usual">
+    <div class="itab">
+      <ul>
+        <li><a href="{:U('../admin/people/index')}" class="selected">人员管理</a></li>
+        <li><a href="{:U('../admin/people/addpeople')}">添加人员</a></li>
+        <li style="float:right; background:none; border:0"><a href="#">分类管理</a></li>
+      </ul>
+    </div>
+    <div class="tabson">
+      <div class="formtext">Hi，<b>{$admin_name}</b>，欢迎您使用信息发布功能！</div>
+      <ul class="forminfo">
+ 		<li>
+          <label>姓名<b>*</b></label>
+		  <input id="name" type="text" class="dfinput" name="name" value="{$people.name}" style="width:518px;"/>
+		  <input type="hidden" name="user_id" value="{$people.user_id}"/>
+        </li>
+       <li>
+          <label>Party ID<b>*</b></label>
+		  <input id="party_id" type="text" class="dfinput" name="party_id" value="<?php if($people['party_id']!='') echo $people['party_id'] ?>" style="width:518px;"/>
+        </li>
+        <!--  
+        <li>
+          <label>密码<b>*</b></label>
+		  <input type="password" class="dfinput" name="password" value="******" style="width:518px;"/>
+        </li>
+        -->
+         <li>
+          <label>头像<b>*</b></label>
+        <if condition="$people.image neq '' ">
+          		<img id="img" src="{$people.image}" style="width:200px;" />
+          <else />
+          		<img id="img" src="" style="display:none;width:200px;" />
+          </if>
+          <input id="file" type="file" name="image" style="width:700px;"/>
+        </li>
+		<li>
+          <label>电话号码<b>*</b></label>
+          <input id="phonenumber" type="datetime" class="dfinput" name="phonenumber" value="{$people.phonenumber}" style="width:518px;"/>
+        </li>
+        <li>
+          <label>入党时间<b>*</b></label>
+          <input type="text" id="join-date" class="dfinput" name="join_date" value="{$people.join_date}" style="width:518px;"/>
+        </li>
+        <li>
+          <label>转入时间<b>*</b></label>
+          <input type="text" class="dfinput" id="transferred-date" name="transferred_date" value="{$people.transferred_date}" style="width:518px;"/>
+        </li>
+        <li>
+          <label>公司<b>*</b></label>
+          <input id="company" type="text" class="dfinput" name="company" value="{$people.company}" style="width:518px;"/>
+        </li>
+        <li>
+          <label>居住地<b>*</b></label>
+          <input id="address" type="text" class="dfinput" name="address" value="{$people.address}" style="width:518px;"/>
+        </li>
+         <li>
+          <label>是否为党代表<b>*</b></label>
+		  <select id='represent' name="represent" value=""  type="text" class="dfinput" style="width:518px;" >
+				<option value=1  <if condition="$people.represent eq 1">selected</if>>是</option>
+				<option value=0  <if condition="$people.represent eq 0">selected</if>>否</option>
+	 	  </select>
+        </li>
+        <li>
+          <label>党代表排名<b>*</b></label>
+          <input id="represent_order" type="text" class="dfinput" name="represent_order" value="{$people.represent_order}" style="width:518px;"/>
+        </li>
+        <li>
+          <label>可进入共建设<b>*</b></label>
+		  <select id='build' name="build" value=""  type="text" class="dfinput" style="width:518px;" >
+				<option value=1 <if condition="$people.build eq 1">selected</if>>是</option>
+				<option value=0 <if condition="$people.build eq 0">selected</if>>否</option>
+	 	  </select>
+        </li>
+       <li>
+          <label>党费<b>*</b></label>
+          <input id="fee" type="text" class="dfinput" name="fee" value="{$people.fee}" style="width:518px;"/>
+        </li>
+       	<li>
+          <label>级别<b>*</b></label>
+           <select name="level" value=”“  type="text" class="dfinput" style="width:518px;" >
+					<volist name="levels" id="level" key="k">
+						<option value="{$level.value_id}"<eq name="level.value_id" value="$people.level_id">selected</eq> >{$level.value_name}</option>
+					</volist>
+	 		</select>
+        </li>
+         <li>
+          <label>职位<b>*</b></label>
+			<input id="post_name" type="text" class="dfinput" name="post_name" value="{$people.post_name}"  style="width:518px;"/>
+        </li>
+        <!--
+       	<li>
+          <label>职称<b>*</b></label>
+          <select name="post_id" value=”“  type="text" class="dfinput" style="width:518px;">
+				<volist name="position" id="post" key="k">
+					<option value="{$post.value_id}"<eq name="post.value_id" value="$people.post_id">selected</eq> >{$post.value_name}</option>
+				</volist>
+	 		</select>
+        </li>
+        -->
+           <li >
+      		<label>所属部门<b>*</b></label>
+			<table border="0" width="400"> 
+			<tr> 
+			<td width="40%"> 
+			<select style="height:200px;WIDTH:300px" multiple id="list1" size="12"> 
+			  <volist name="agency_List" id="agency" key="k">
+			    <option value="{$agency.agency_id}">{$agency.agency_name}</option>
+			  </volist>
+			</select> 
+			</td> 
+			<td width="20%" align="center">
+			<input type="button" value="全部添加" onclick="moveAllOption(document.getElementById('list1'), document.getElementById('list2'))"><br/> 
+			<br/>
+			<input type="button" value="添加" onclick="moveOption(document.getElementById('list1'), document.getElementById('list2'))"><br/> 
+			<br/> 
+			<input type="button" value="移除" onclick="moveOption(document.getElementById('list2'), document.getElementById('list1'))"><br/> 
+			<br/> 
+			<input type="button" value="全部移除" onclick="moveAllOption(document.getElementById('list2'), document.getElementById('list1'))"> 
+			</td> 
+			<td width="40%"> 
+			<select style="height:200px;WIDTH:300px" multiple id="list2" size="12">
+			  <volist name="user_agencys" id="user_agency" key="k">
+			    <option value="{$user_agency.agency_id}">{$user_agency.agency_name}</option>
+			  </volist>
+			</select> 
+			</td> 
+			</tr> 
+			</table> 
+			<input type="hidden" id="ids" name="ids" value="<?php foreach($user_agencys as $user_agency){ echo $user_agency['agency_id'] ;?>,<?php }?>" size="40"> 
+		</li>
+          <label>&nbsp;</label>
+          <input name="" type="submit" class="btn2" value="保存"/>
+      </ul>
+    </div>
+    
+  </div>
+</form>
+  <script type="text/javascript"> 
+
+	var ue3 = UE.getEditor('content');
+
+
+		<!--操作全部-->
+		function moveAllOption(e1, e2){ 
+		 var fromObjOptions=e1.options; 
+		  for(var i=0;i<fromObjOptions.length;i++){ 
+		   fromObjOptions[0].selected=true; 
+		   e2.appendChild(fromObjOptions[i]); 
+		   i--; 
+		  } 
+		 document.getElementById("ids").value=getvalue(document.getElementById("list2")); 
+		}
+
+		<!--操作单个-->
+		function moveOption(e1, e2){ 
+		 var fromObjOptions=e1.options; 
+		  for(var i=0;i<fromObjOptions.length;i++){ 
+		   if(fromObjOptions[i].selected){ 
+		    e2.appendChild(fromObjOptions[i]); 
+		    i--; 
+		   } 
+		  } 
+		  document.getElementById("ids").value=getvalue(document.getElementById("list2")); 
+		} 
+
+		function getvalue(geto){ 
+		var allvalue = ""; 
+		for(var i=0;i<geto.options.length;i++){ 
+		allvalue +=geto.options[i].value + ","; 
+		} 
+		return allvalue; 
+		} 
+		jQuery(function () {
+            // 时间设置
+            jQuery('#join-date').datetimepicker({
+                timeFormat: "HH:mm:ss",
+                dateFormat: "yy-mm-dd"
+            });
+
+        });
+		jQuery(function () {
+            // 时间设置
+            jQuery('#transferred-date').datetimepicker({
+                timeFormat: "HH:mm:ss",
+                dateFormat: "yy-mm-dd"
+            });
+
+        });
+		function changepos1111(obj,index) 
+		{ 
+		if(index==-1){ 
+		if (obj.selectedIndex>0){ 
+		obj.options(obj.selectedIndex).swapNode(obj.options(obj.selectedIndex-1)) 
+		} 
+		} 
+		else if(index==1){ 
+		if (obj.selectedIndex<obj.options.length-1){ 
+		obj.options(obj.selectedIndex).swapNode(obj.options(obj.selectedIndex+1)) 
+		} 
+		} 
+
+
+		} 
+		$('#file').change(function(e) {
+			var file = e.target.files[0]
+			var reader  = new FileReader();
+			reader.onload = function(evt){$('#img').attr('src', evt.target.result)}
+            reader.readAsDataURL(file);
+            $('#img').css("display","");
+		})
+		function checksubmit(){
+			if($('#name').val()==""){
+				alert("名字未输入！");
+				return false;
+			}
+			if($('#party_id').val()==""){
+				alert("Party ID未输入！");
+				return false;
+			}
+			if($('#phonenumber').val()==""){
+				alert("电话号码未输入！");
+				return false;
+			}
+			/*if ($("#mobile").val().match(/^0?[1][0-9]{10}$/)) {
+				alert("电话号码不正确！");
+				return false;
+			}*/
+			/*
+			if($('#company').val()==""){
+				alert("公司未输入！");
+				return false;
+			}*/
+			if($('#fee').val()==""){
+				alert("党费未输入！");
+				return false;
+			}
+			/*
+			if($('#post_name').val()==""){
+				alert("职位未输入！");
+				return false;
+			}
+			*/
+			return true;
+		}
+    </script> 
+</div>
+	</div>
+</div>
+</body>
+</html>
